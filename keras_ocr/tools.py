@@ -10,7 +10,6 @@ import cv2
 import imgaug
 import numpy as np
 import validators
-import matplotlib.pyplot as plt
 from shapely import geometry
 from scipy import spatial
 
@@ -127,7 +126,7 @@ def combine_line(line):
     return box, text
 
 
-def drawAnnotations(image, predictions, ax=None):
+def drawAnnotations(image, predictions, ax):
     """Draw text annotations onto image.
 
     Args:
@@ -135,8 +134,6 @@ def drawAnnotations(image, predictions, ax=None):
         predictions: The predictions as provided by `pipeline.recognize`.
         ax: A matplotlib axis on which to draw.
     """
-    if ax is None:
-        _, ax = plt.subplots()
     ax.imshow(drawBoxes(image=image, boxes=predictions, boxes_format='predictions'))
     predictions = sorted(predictions, key=lambda p: p[1][:, 1].min())
     left = []
